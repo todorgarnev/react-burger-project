@@ -1,11 +1,11 @@
 import React from 'react';
-import './Burger.css'
+import styles from './Burger.module.css'
 
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
-const burger = props => {
+const burger = (props) => {
   return (
-    <div className="burger-container">
+    <div className={styles.burgerContainer}>
       <BurgerIngredient type="bread-top"></BurgerIngredient>
       <BurgerIngredient type="cheese"></BurgerIngredient>
       <BurgerIngredient type="meat"></BurgerIngredient>
