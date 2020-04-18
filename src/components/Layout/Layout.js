@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Layout.module.css'
 
-const layout = (props) => (
+const Layout = (props) => (
   <React.Fragment>
     <div>Toolbar, SideDrawer, Backdrop</div>
 
@@ -11,4 +11,4 @@ const layout = (props) => (
   </React.Fragment>
 );
 
-export default layout;
+export default Layout;

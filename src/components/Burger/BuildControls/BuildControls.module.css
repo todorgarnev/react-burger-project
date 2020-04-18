@@ -1,0 +1,10 @@
+.buildControls {
+  margin: auto;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #cf8f2e;
+  box-shadow: 0 2px 1px #ccc;
+}
