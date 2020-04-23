@@ -92,13 +92,13 @@ class BurgerBuilder extends Component {
     let queryString = '';
 
     for (const ingredient in this.state.ingredients) {
-      queryParam.push(`${encodeURIComponent(ingredient)}=${encodeURIComponent(this.state.ingredients[ingredient])}`)
+      queryParam.push(`${encodeURIComponent(ingredient)}=${encodeURIComponent(this.state.ingredients[ingredient])}`);
     }
-    queryString = queryParam.join('&');
+    queryString = `?${queryParam.join('&')}`;
 
     this.props.history.push({
       pathname: '/checkout',
-      search: '?' + queryString
+      search: queryString
     });
   }
 
