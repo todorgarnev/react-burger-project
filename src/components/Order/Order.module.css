@@ -1,0 +1,8 @@
+.order {
+  box-sizing: border-box;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  width: 100%;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+}
