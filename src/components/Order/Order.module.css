@@ -2,7 +2,15 @@
   box-sizing: border-box;
   margin: 0.5rem auto;
   padding: 0.5rem;
-  width: 100%;
+  width: 80%;
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
+}
+
+.ingredient {
+  margin: 0 0.5rem;
+  padding: 0.3rem;
+  display: inline-block;
+  border: 1px solid #ccc;
+  text-transform: capitalize;
 }
