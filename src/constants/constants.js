@@ -19,7 +19,13 @@ export const contactForm = {
       type: 'text',
       placeholder: 'Your name'
     },
-    value: ''
+    value: '',
+    validation: {
+      required: true,
+      minLength: 5
+    },
+    valid: false,
+    touched: false
   },
   street: {
     elementType: 'input',
@@ -27,7 +33,12 @@ export const contactForm = {
       type: 'text',
       placeholder: 'Your street'
     },
-    value: ''
+    value: '',
+    validation: {
+      required: true
+    },
+    valid: false,
+    touched: false
   },
   zipCode: {
     elementType: 'input',
@@ -35,7 +46,14 @@ export const contactForm = {
       type: 'text',
       placeholder: 'Your ZIP code'
     },
-    value: ''
+    value: '',
+    validation: {
+      required: true,
+      minLength: 5,
+      maxLength: 5
+    },
+    valid: false,
+    touched: false
   },
   country: {
     elementType: 'input',
@@ -43,7 +61,12 @@ export const contactForm = {
       type: 'text',
       placeholder: 'Your country'
     },
-    value: ''
+    value: '',
+    validation: {
+      required: true
+    },
+    valid: false,
+    touched: false
   },
   email: {
     elementType: 'input',
@@ -51,7 +74,12 @@ export const contactForm = {
       type: 'email',
       placeholder: 'Your email'
     },
-    value: ''
+    value: '',
+    validation: {
+      required: true
+    },
+    valid: false,
+    touched: false
   },
   deliveryMethod: {
     elementType: 'select',
@@ -61,6 +89,8 @@ export const contactForm = {
         { value: 'cheapest', displayValue: 'Cheapest' }
       ],
     },
-    value: ''
+    value: 'cheapest',
+    validation: {},
+    valid: true
   }
 };
