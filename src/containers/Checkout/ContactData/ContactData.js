@@ -4,15 +4,12 @@ import axios from '../../../axios-orders';
 
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
+import { contactForm } from '../../../constants/constants';
 
 class ContactData extends Component {
   state = {
-    name: '',
-    email: '',
-    address: {
-      street: '',
-      zipCode: ''
-    },
+    orderFrom: contactForm,
     loading: false
   }
 
@@ -21,15 +18,7 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: 'Todor Todorakis',
-        address: {
-          street: 'Test street',
-          zipCode: 2900
-        },
-        email: 'test@test.com',
-        deliveryMethod: 'fastest'
-      }
+
     };
 
     this.setState({ loading: true });
@@ -42,17 +31,42 @@ class ContactData extends Component {
       .catch(error => this.setState({ loading: false }));
   }
 
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedOrderForm = {
+      ...this.state.orderFrom,
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    };
+
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({ orderFrom: updatedOrderForm });
+  }
+
   render() {
+    const formElementsArray = [];
+
+    for (const key in this.state.orderFrom) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.orderFrom[key]
+      });
+    }
+
     const form = this.state.loading ?
       <Spinner /> :
       <form>
-        <input className={styles.input} type="text" name="name" placeholder="Your name" />
-        <input className={styles.input} type="email" name="email" placeholder="Your email" />
-        <input className={styles.input} type="text" name="street" placeholder="Your street" />
-        <input className={styles.input} type="text" name="zipCode" placeholder="Your zip code" />
+        {formElementsArray.map(formElement => (
+          <Input
+            key={formElement.id}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+        ))}
         <Button buttonType="success" clicked={this.orderHandler}>ORDER</Button>
       </form>;
-
 
     return (
       <div className={styles.contactData}>

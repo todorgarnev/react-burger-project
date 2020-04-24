@@ -1,0 +1,27 @@
+.input {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+  display: block;
+  font-weight: bold;
+}
+
+.inputElement {
+  box-sizing: border-box;
+  padding: 0.3rem 0.5rem;
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font: inherit;
+  outline: none;
+}
+
+.inputElement:focus {
+  background-color: #ccc;
+  outline: none;
+}
