@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { INGREDIENT_PRICES } from '../../constants/constants';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -13,7 +12,6 @@ import * as ActionTypes from '../../store/actions';
 
 class BurgerBuilder extends Component {
   state = {
-    purchaseable: false,
     purchasing: false,
     error: false
   };
@@ -27,33 +25,10 @@ class BurgerBuilder extends Component {
   updatePurchaseState(ingredients) {
     for (const ingredient in ingredients) {
       if (ingredients[ingredient] > 0) {
-        this.setState({ purchaseable: true });
-        return;
+        return true;
       }
     }
-    this.setState({ purchaseable: false });
-  }
-
-  addIngredientHandler = (type) => {
-    const updatedIngredients = {
-      ...this.state.ingredients,
-      [type]: this.state.ingredients[type] + 1
-    }
-    const newTotalPrice = this.state.totalPrice + INGREDIENT_PRICES[type];
-
-    this.setState({ totalPrice: newTotalPrice, ingredients: updatedIngredients });
-    this.updatePurchaseState(updatedIngredients);
-  }
-
-  removeIngredientHandler = (type) => {
-    const updatedIngredients = {
-      ...this.state.ingredients,
-      [type]: this.state.ingredients[type] > 0 ? this.state.ingredients[type] - 1 : 0
-    }
-    const newTotalPrice = this.state.totalPrice - INGREDIENT_PRICES[type];
-
-    this.setState({ totalPrice: newTotalPrice, ingredients: updatedIngredients });
-    this.updatePurchaseState(updatedIngredients);
+    return false;
   }
 
   purchaseHandler = () => {
@@ -65,19 +40,7 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    const queryParams = [];
-    let queryString = '';
-
-    for (const ingredient in this.state.ingredients) {
-      queryParams.push(`${encodeURIComponent(ingredient)}=${encodeURIComponent(this.state.ingredients[ingredient])}`);
-    }
-    queryParams.push(`price=${this.state.totalPrice}`);
-    queryString = `?${queryParams.join('&')}`;
-
-    this.props.history.push({
-      pathname: '/checkout',
-      search: queryString
-    });
+    this.props.history.push('/checkout');
   }
 
   render() {
@@ -87,7 +50,7 @@ class BurgerBuilder extends Component {
         <BuildControls
           ingredients={this.props.ingredients}
           price={this.props.totalPrice}
-          purchaseable={this.state.purchaseable}
+          purchaseable={this.updatePurchaseState(this.props.ingredients)}
           ordered={this.purchaseHandler}
           ingredientAdded={this.props.onIngredientAdded}
           ingredientRemoved={this.props.onIngredientRemoved}
