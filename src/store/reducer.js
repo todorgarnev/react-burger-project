@@ -13,7 +13,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_INGREDIENT:
-      debugger;
       return {
         ...state,
         ingredients: {
