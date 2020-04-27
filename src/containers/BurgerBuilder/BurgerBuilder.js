@@ -12,15 +12,8 @@ import * as burgerBuilderActions from '../../store/actions/actionCreators';
 
 class BurgerBuilder extends Component {
   state = {
-    purchasing: false,
-    error: false
+    purchasing: false
   };
-
-  componentDidMount() {
-    // axios.get('/ingredients.json')
-    //   .then(response => this.setState({ ingredients: response.data }))
-    //   .catch(error => this.setState({ error: true }));
-  }
 
   updatePurchaseState(ingredients) {
     for (const ingredient in ingredients) {
@@ -56,7 +49,7 @@ class BurgerBuilder extends Component {
           ingredientRemoved={this.props.onIngredientRemoved}
         />
       </React.Fragment>) :
-      (this.state.error ? <p>Ingredients can't be loaded!</p> : <Spinner />);
+      (this.props.error ? <p>Ingredients can't be loaded!</p> : <Spinner />);
 
     return (
       <React.Fragment>
@@ -76,7 +69,8 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => ({
   ingredients: state.ingredients,
-  totalPrice: state.totalPrice
+  totalPrice: state.totalPrice,
+  error: state.error
 });
 
 const mapDispatchToProps = dispatch => ({
