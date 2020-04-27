@@ -8,7 +8,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 import App from './App';
-import reducer from './store/reducer';
+import reducer from './store/reducers/burgerBuilder';
 
 const store = createStore(reducer, composeWithDevTools());
 
