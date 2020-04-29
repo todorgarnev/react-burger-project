@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { registerForm } from '../../constants/constants'
+import Spinner from '../../components/UI/Spinner/Spinner';
+import { LOGIN_ERROR_MESSAGES } from '../../constants/constants';
 import * as actions from '../../store/actions/actionCreators';
 
 class Auth extends Component {
@@ -78,22 +80,36 @@ class Auth extends Component {
         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
     ));
 
-    return (
-      <div className={styles.auth}>
-        <form onSubmit={this.submitHandler}>
-          {form}
-          <Button buttonType="success">SUBMIT</Button>
-        </form>
-        <Button buttonType="danger" clicked={this.switchAuthModeHandler}>
-          SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}
-        </Button>
-      </div>
-    );
+    const errorMessage = this.props.error ?
+      <span className={styles.error}>{LOGIN_ERROR_MESSAGES[this.props.error.message]}</span> :
+      null;
+
+    const signUpLayout = this.props.loading ?
+      <Spinner /> :
+      (
+        <div className={styles.auth}>
+          {errorMessage}
+          <form onSubmit={this.submitHandler}>
+            {form}
+            <Button buttonType="success">SUBMIT</Button>
+          </form>
+          <Button buttonType="danger" clicked={this.switchAuthModeHandler}>
+            SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}
+          </Button>
+        </div>
+      );
+
+    return signUpLayout;
   }
 }
+
+const mapStateToProps = state => ({
+  loading: state.auth.loading,
+  error: state.auth.error
+});
 
 const mapDispatchToProps = dispatch => ({
   onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp))
 });
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

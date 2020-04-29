@@ -11,6 +11,11 @@ export const INGREDIENT_PRICES = {
   meat: 1.3,
   bacon: 0.7
 }
+export const LOGIN_ERROR_MESSAGES = {
+  EMAIL_EXISTS: 'Email already exists. Please, try again.',
+  EMAIL_NOT_FOUND: 'Email not found. Please, try again.',
+  INVALID_PASSWORD: 'Invalid password. Please, try again.'
+};
 
 export const contactForm = {
   name: {
