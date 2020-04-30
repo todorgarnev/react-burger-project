@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Auth.module.css';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -80,32 +81,33 @@ class Auth extends Component {
         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
     ));
 
-    const errorMessage = this.props.error ?
-      <span className={styles.error}>{LOGIN_ERROR_MESSAGES[this.props.error.message]}</span> :
-      null;
+    const errorMessage = this.props.error
+      ? <span className={styles.error}>{LOGIN_ERROR_MESSAGES[this.props.error.message]}</span>
+      : null;
 
-    const signUpLayout = this.props.loading ?
-      <Spinner /> :
-      (
-        <div className={styles.auth}>
-          {errorMessage}
-          <form onSubmit={this.submitHandler}>
-            {form}
-            <Button buttonType="success">SUBMIT</Button>
-          </form>
-          <Button buttonType="danger" clicked={this.switchAuthModeHandler}>
-            SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}
-          </Button>
-        </div>
-      );
+    const signUpLayout = this.props.loading
+      ? <Spinner />
+      : (<div className={styles.auth}>
+        {errorMessage}
+        <form onSubmit={this.submitHandler}>
+          {form}
+          <Button buttonType="success">SUBMIT</Button>
+        </form>
+        <Button buttonType="danger" clicked={this.switchAuthModeHandler}>
+          SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}
+        </Button>
+      </div>);
 
-    return signUpLayout;
+    const redirect = this.props.isAuthenticated ? <Redirect to="/" /> : signUpLayout;
+
+    return redirect;
   }
 }
 
 const mapStateToProps = state => ({
   loading: state.auth.loading,
-  error: state.auth.error
+  error: state.auth.error,
+  isAuthenticated: state.auth.token !== null
 });
 
 const mapDispatchToProps = dispatch => ({

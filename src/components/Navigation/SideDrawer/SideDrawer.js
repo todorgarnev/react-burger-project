@@ -11,7 +11,7 @@ const SideDrawer = (props) => (
     <div className={`${styles.sideDrawer} ${props.open ? styles.open : styles.close}`}>
       <Logo height="11%" />
       <nav className={styles.nav}>
-        <NavigationItems />
+        <NavigationItems isAuthenticated={props.isAuth} />
       </nav>
     </div>
   </React.Fragment>
