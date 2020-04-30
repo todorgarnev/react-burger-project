@@ -1,7 +1,6 @@
 import { updateObject } from '../utility/utility';
 import * as actionTypes from '../actions/actionTypes';
 
-// Setting the token in the store for course purposes only
 const initialState = {
   token: null,
   userId: null,
