@@ -15,19 +15,21 @@ class Checkout extends Component {
   }
 
   render() {
-    const summary = (this.props.ingredients && !this.props.purchased) ?
-      (<React.Fragment>
-        <CheckoutSummary
-          ingredients={this.props.ingredients}
-          checkoutCancelled={this.checkoutCancelledHandler}
-          checkoutContinued={this.checkoutContinuedHandler}
-        />
-        <Route
-          path={`${this.props.match.path}/contact-data`}
-          component={ContactData}
-        />
-      </React.Fragment>) :
-      <Redirect to='/' />;
+    const summary = (this.props.ingredients && !this.props.purchased)
+      ? (
+        <React.Fragment>
+          <CheckoutSummary
+            ingredients={this.props.ingredients}
+            checkoutCancelled={this.checkoutCancelledHandler}
+            checkoutContinued={this.checkoutContinuedHandler}
+          />
+          <Route
+            path={`${this.props.match.path}/contact-data`}
+            component={ContactData}
+          />
+        </React.Fragment>
+      )
+      : <Redirect to='/' />;
 
     return summary;
   }
