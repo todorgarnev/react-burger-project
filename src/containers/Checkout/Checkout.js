@@ -23,7 +23,7 @@ class Checkout extends Component {
           checkoutContinued={this.checkoutContinuedHandler}
         />
         <Route
-          path={`${this.props.match.path}/contact-data`}
+          path="/checkout/contact-data"
           component={ContactData}
         />
       </React.Fragment>) :
