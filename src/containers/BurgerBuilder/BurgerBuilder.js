@@ -10,7 +10,7 @@ import withErrorHandler from '../../hoc/withHandlerError/withHandlerError';
 import axios from '../../axios-orders';
 import * as actions from '../../store/actions/actionCreators';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   state = {
     purchasing: false
   };
