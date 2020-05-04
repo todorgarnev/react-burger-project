@@ -20,30 +20,9 @@ const App = (props) => {
     ? (
       <Switch>
         <Route path="/" exact component={BurgerBuilder} />
-        <Route
-          path="/checkout"
-          render={() => (
-            <Suspense fallback={<div>Loading..</div>}>
-              <Checkout {...props} />
-            </Suspense>
-          )}
-        />
-        <Route
-          path="/orders"
-          render={() => (
-            <Suspense fallback={<div>Loading..</div>}>
-              <Orders />
-            </Suspense>
-          )}
-        />
-        <Route
-          path="/auth"
-          render={() => (
-            <Suspense fallback={<div>Loading..</div>}>
-              <Auth />
-            </Suspense>
-          )}
-        />
+        <Route path="/checkout" render={() => <Checkout {...props} />} />
+        <Route path="/orders" render={() => <Orders />} />
+        <Route path="/auth" render={() => <Auth />} />
         <Route path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>
@@ -51,14 +30,7 @@ const App = (props) => {
     : (
       <Switch>
         <Route path="/" exact component={BurgerBuilder} />
-        <Route
-          path="/auth"
-          render={() => (
-            <Suspense fallback={<div>Loading..</div>}>
-              <Auth />
-            </Suspense>
-          )}
-        />
+        <Route path="/auth" render={() => <Auth />} />
         <Redirect to="/" />
       </Switch>
     );
@@ -66,7 +38,9 @@ const App = (props) => {
   return (
     <div>
       <Layout>
-        {routes}
+        <Suspense fallback={<p>Loading...</p>}>
+          {routes}
+        </Suspense>
       </Layout>
     </div>
   );
