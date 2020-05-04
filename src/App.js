@@ -16,7 +16,6 @@ class App extends Component {
     this.props.onTryAutoSignUp();
   }
 
-
   render() {
     const routes = this.props.isAuthenticated
       ? (
