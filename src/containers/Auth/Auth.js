@@ -14,12 +14,13 @@ import * as actions from '../../store/actions/actionCreators';
 const Auth = (props) => {
   const [controls, setControls] = useState(registerForm);
   const [isSignUp, setIsSignUp] = useState(true);
+  const { building, authRedirectPath, onSetAuthRedirectPath } = props;
 
   useEffect(() => {
-    if (!props.building && props.authRedirectPath !== '/') {
-      props.onSetAuthRedirectPath();
+    if (!building && authRedirectPath !== '/') {
+      onSetAuthRedirectPath();
     }
-  }, []);
+  }, [building, authRedirectPath, onSetAuthRedirectPath]);
 
   const inputChangedHandler = (event, controlName) => {
     const updatedControls = updateObject(controls, {

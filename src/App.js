@@ -12,9 +12,11 @@ const Orders = React.lazy(() => import('./containers/Orders/Orders'));
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 
 const App = (props) => {
+  const { onTryAutoSignUp } = props;
+
   useEffect(() => {
-    props.onTryAutoSignUp();
-  }, []);
+    onTryAutoSignUp();
+  }, [onTryAutoSignUp]);
 
   const routes = props.isAuthenticated
     ? (
